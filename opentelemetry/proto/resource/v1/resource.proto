@@ -34,4 +34,11 @@ message Resource {
   // dropped_attributes_count is the number of dropped attributes. If the value is 0, then
   // no attributes were dropped.
   uint32 dropped_attributes_count = 2;
+
+  // Defines the producing entity type of this resource, e.g "service", "k8s.pod", etc.
+  string entity_type = 3;
+
+  // Set of attributes that identify the producing entity.
+  // Note that the identifying attributes may be also recorded in the "attributes" field.
+  repeated opentelemetry.proto.common.v1.KeyValue entity_id = 4;
 }
