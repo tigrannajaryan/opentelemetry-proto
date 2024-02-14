@@ -52,28 +52,31 @@ message ScopeEntities {
   string schema_url = 3;
 }
 
-// The full state of the Entity.
+// Entity event, describes something that happened with the entity.
 message EntityEvent {
   // Time when this state was observed.
   uint64 time_unix_nano = 1;
 
   // Type of the entity, e.g. "service", "host", etc.
-  string type = 2;
+  string entity_type = 2;
 
   // Set of attributes that identify the entity.
   repeated opentelemetry.proto.common.v1.KeyValue id = 3;
 
+  // One of the following event types must be set.
   oneof data {
-    EntityState state = 4;
-    EntityDelete delete = 5;
+    EntityState entity_state = 4;
+    EntityDelete entity_delete = 5;
   }
 }
 
+// The full state of the Entity.
 message EntityState {
   // Set of non-identifying attributes only.
   repeated opentelemetry.proto.common.v1.KeyValue attributes = 4;
   uint32 dropped_attributes_count = 5;
 }
 
+// Deletion event. No additional information is recorded.
 message EntityDelete {
 }
