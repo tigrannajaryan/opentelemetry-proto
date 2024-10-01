@@ -25,7 +25,7 @@ option java_outer_classname = "EntitiesServiceProto";
 option go_package = "go.opentelemetry.io/proto/otlp/collector/entities/v1";
 
 // Service that can be used to push entities between one Application instrumented with
-// OpenTelemetry and an collector, or between an collector and a central collector (in this
+// OpenTelemetry and a collector, or between a collector and a central collector (in this
 // case entities are sent/received to/from multiple Applications).
 service EntitiesService {
   // For performance reasons, it is recommended to keep this RPC
@@ -58,7 +58,7 @@ message ExportEntitiesServiceResponse {
 }
 
 message ExportEntitiesPartialSuccess {
-  // The number of rejected log records.
+  // The number of rejected EntityEvents.
   //
   // A `rejected_<signal>` field holding a `0` value indicates that the
   // request was fully accepted.

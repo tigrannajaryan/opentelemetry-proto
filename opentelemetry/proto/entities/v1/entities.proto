@@ -25,7 +25,7 @@ option java_package = "io.opentelemetry.proto.entities.v1";
 option java_outer_classname = "EntitiesProto";
 option go_package = "go.opentelemetry.io/proto/otlp/entities/v1";
 
-// EntitiesData represents the entities data that can be stored in a persistent storage,
+// EntitiesData represents the entities data that can be stored in persistent storage,
 // OR can be embedded by other protocols that transfer OTLP entities data but do not
 // implement the OTLP protocol.
 //
