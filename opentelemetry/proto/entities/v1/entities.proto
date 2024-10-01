@@ -1,0 +1,82 @@
+// Copyright 2020, OpenTelemetry Authors
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package opentelemetry.proto.entities.v1;
+
+import "opentelemetry/proto/common/v1/common.proto";
+import "opentelemetry/proto/resource/v1/resource.proto";
+
+option csharp_namespace = "OpenTelemetry.Proto.Entities.V1";
+option java_multiple_files = true;
+option java_package = "io.opentelemetry.proto.entities.v1";
+option java_outer_classname = "EntitiesProto";
+option go_package = "go.opentelemetry.io/proto/otlp/entities/v1";
+
+// EntitiesData represents the entities data that can be stored in persistent storage,
+// OR can be embedded by other protocols that transfer OTLP entities data but do not
+// implement the OTLP protocol.
+//
+// The main difference between this message and collector protocol is that
+// in this message there will not be any "control" or "metadata" specific to
+// OTLP protocol.
+//
+// When new fields are added into this message, the OTLP request MUST be updated
+// as well.
+message EntitiesData {
+  repeated ScopeEntities scope_entities = 1;
+}
+
+// A collection of Entities produced by a Scope.
+message ScopeEntities {
+  // The instrumentation scope information for the entities in this message.
+  // Semantically when InstrumentationScope isn't set, it is equivalent with
+  // an empty instrumentation scope name (unknown).
+  opentelemetry.proto.common.v1.InstrumentationScope scope = 1;
+
+  repeated EntityEvent entity_events = 2;
+
+  // This schema_url applies to all entities in the "entity_events" field.
+  string schema_url = 3;
+}
+
+// Entity event, describes something that happened with the entity.
+message EntityEvent {
+  // Time when this state was observed.
+  uint64 time_unix_nano = 1;
+
+  // Type of the entity, e.g. "service", "host", etc.
+  string entity_type = 2;
+
+  // Set of attributes that identify the entity.
+  repeated opentelemetry.proto.common.v1.KeyValue id = 3;
+
+  // One of the following event types must be set.
+  oneof data {
+    EntityState entity_state = 4;
+    EntityDelete entity_delete = 5;
+  }
+}
+
+// The full state of the Entity.
+message EntityState {
+  // Set of non-identifying attributes only.
+  repeated opentelemetry.proto.common.v1.KeyValue attributes = 4;
+  uint32 dropped_attributes_count = 5;
+}
+
+// Deletion event. No additional information is recorded.
+message EntityDelete {
+}
