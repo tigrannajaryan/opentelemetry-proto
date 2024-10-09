@@ -35,10 +35,36 @@ message Resource {
   // no attributes were dropped.
   uint32 dropped_attributes_count = 2;
 
-  // Defines the producing entity type of this resource, e.g "service", "k8s.pod", etc.
-  string entity_type = 3;
+  // Set of entities that participate in this Resource.
+  repeated ResourceEntityRef entities = 3;
+}
 
-  // Set of attributes that identify the producing entity.
-  // Note that the identifying attributes may be also recorded in the "attributes" field.
-  repeated opentelemetry.proto.common.v1.KeyValue entity_id = 4;
+message ResourceEntityRef {
+  // The Schema URL, if known. This is the identifier of the Schema that the entity data
+  // is recorded in. To learn more about Schema URL see
+  // https://opentelemetry.io/docs/specs/otel/schemas/#schema-url
+  //
+  // This schema_url applies to the data in this message and to the Resource attributes
+  // referenced by id_attr_keys and descr_attr_keys.
+  // TODO: discuss if we are happy with this somewhat complicated definition of what
+  // the schema_url applies to.
+  //
+  // This field obsoletes the schema_url field in ResourceMetrics/ResourceSpans/ResourceLogs.
+  string schema_url = 1;
+
+  // Defines the type of the entity. MUST not change during the lifetime of the entity.
+  // For example: "service" or "host". This field is required and MUST not be empty
+  // for valid entities.
+  string type = 2;
+
+  // Attribute Keys that identify the entity.
+  // MUST not change during the lifetime of the entity. The Id must contain at least one attribute.
+  // These keys MUST exist in the containing Resource.attributes.
+  repeated string id_attr_keys = 3;
+
+  // Descriptive (non-identifying) attribute keys of the entity.
+  // MAY change over the lifetime of the entity. MAY be empty.
+  // These attribute keys are not part of entity's identity.
+  // These keys MUST exist in the containing Resource.attributes.
+  repeated string descr_attr_keys = 4;
 }
