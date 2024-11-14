@@ -60,6 +60,8 @@ message ResourceLogs {
   // https://opentelemetry.io/docs/specs/otel/schemas/#schema-url
   // This schema_url applies to the data in the "resource" field. It does not apply
   // to the data in the "scope_logs" field which have their own schema_url field.
+  //
+  // This field is deprecated in favour of Resource.entities.schema_url.
   string schema_url = 3;
 }
 
