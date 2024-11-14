@@ -14,15 +14,15 @@
 
 syntax = "proto3";
 
-package opentelemetry.proto.collector.entities.v1;
+package opentelemetry.proto.collector.entities.v1development;
 
-import "opentelemetry/proto/entities/v1/entities.proto";
+import "opentelemetry/proto/entities/v1development/entities.proto";
 
-option csharp_namespace = "OpenTelemetry.Proto.Collector.Entities.V1";
+option csharp_namespace = "OpenTelemetry.Proto.Collector.Entities.V1Development";
 option java_multiple_files = true;
-option java_package = "io.opentelemetry.proto.collector.entities.v1";
+option java_package = "io.opentelemetry.proto.collector.entities.v1development";
 option java_outer_classname = "EntitiesServiceProto";
-option go_package = "go.opentelemetry.io/proto/otlp/collector/entities/v1";
+option go_package = "go.opentelemetry.io/proto/otlp/collector/entities/v1development";
 
 // Service that can be used to push entities between one Application instrumented with
 // OpenTelemetry and a collector, or between a collector and a central collector (in this
@@ -35,7 +35,7 @@ service EntitiesService {
 
 message ExportEntitiesServiceRequest {
   // An array of ResourceEntities.
-  repeated opentelemetry.proto.entities.v1.ScopeEntities scope_entities = 1;
+  repeated opentelemetry.proto.entities.v1development.ScopeEntities scope_entities = 1;
 }
 
 message ExportEntitiesServiceResponse {

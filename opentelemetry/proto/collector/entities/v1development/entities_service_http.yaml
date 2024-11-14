@@ -4,6 +4,6 @@ type: google.api.Service
 config_version: 3
 http:
  rules:
- - selector: opentelemetry.proto.collector.entities.v1.EntitiesService.Export
-   post: /v1/entities
+ - selector: opentelemetry.proto.collector.entities.v1development.EntitiesService.Export
+   post: /v1development/entities
    body: "*"

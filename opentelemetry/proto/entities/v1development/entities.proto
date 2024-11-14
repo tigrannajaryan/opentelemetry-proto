@@ -14,16 +14,16 @@
 
 syntax = "proto3";
 
-package opentelemetry.proto.entities.v1;
+package opentelemetry.proto.entities.v1development;
 
 import "opentelemetry/proto/common/v1/common.proto";
 import "opentelemetry/proto/resource/v1/resource.proto";
 
-option csharp_namespace = "OpenTelemetry.Proto.Entities.V1";
+option csharp_namespace = "OpenTelemetry.Proto.Entities.V1Development";
 option java_multiple_files = true;
-option java_package = "io.opentelemetry.proto.entities.v1";
+option java_package = "io.opentelemetry.proto.entities.v1development";
 option java_outer_classname = "EntitiesProto";
-option go_package = "go.opentelemetry.io/proto/otlp/entities/v1";
+option go_package = "go.opentelemetry.io/proto/otlp/entities/v1development";
 
 // EntitiesData represents the entities data that can be stored in persistent storage,
 // OR can be embedded by other protocols that transfer OTLP entities data but do not
